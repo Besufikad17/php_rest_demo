@@ -13,14 +13,15 @@ class UserRepository {
 	}
 
 	public function create(User $user) {
+		echo $user->getEmail();
 		$fname = $user->getFirstName();
 		$lname = $user->getLastName();
 		$email = $user->getEmail();
 		$phone_number = $user->getPhoneNumber();
-		$password = $user->getPassword();
+		$password = password_hash($user->getPassword(), PASSWORD_BCRYPT);
 
 		$result = $this->db->runQuery(
-			"INSERT INTO users(first_name, last_name, email, phone_number) VALUES ('$fname', '$lname', '$email', '$phone_number', '$password')");
+			"INSERT INTO users(first_name, last_name, email, phone_number, password) VALUES ('$fname', '$lname', '$email', '$phone_number', '$password')");
 		return $result;	
 	}
 }

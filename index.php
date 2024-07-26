@@ -11,11 +11,11 @@
 				<div class="flex flex-col md:flex-row items-center md:space-x-6 justify-between">
 					<div class="flex flex-col">
 						<label class="mb-2">First name</label>
-						<input class="border-gray-700 border-2 p-1 text-sm rounded-md" type="text" name="first-name" placeholder="Enter your first name" required />
+						<input class="border-gray-700 border-2 p-1 text-sm rounded-md" type="text" name="first_name" placeholder="Enter your first name" required />
 					</div>
 					<div class="flex flex-col mt-4 md:mt-0">
 						<label class="mb-2">Last name</label>
-						<input class="border-gray-700 border-2 p-1 text-sm rounded-md" type="text" name="last-name" placeholder="Enter your last name" required />
+						<input class="border-gray-700 border-2 p-1 text-sm rounded-md" type="text" name="last_name" placeholder="Enter your last name" required />
 					</div>
 				</div>
 				<div class="flex flex-col mt-4">
@@ -24,7 +24,7 @@
 				</div>
 				<div class="flex flex-col mt-4">
 					<label class="mb-2">Phone number</label>
-					<input class="border-gray-700 border-2 p-1 text-sm rounded-md" type="text" name="phone-number" placeholder="Enter phone number" required />
+					<input class="border-gray-700 border-2 p-1 text-sm rounded-md" type="text" name="phone_number" placeholder="Enter phone number" required />
 				</div>
 				<div class="flex flex-col mt-4">
 					<label class="mb-2">Password</label>
@@ -37,6 +37,11 @@
 		</div>
 	</body>
 	<?php
+		require_once __DIR__ . "/utils/helpers/db.php";
+		require_once __DIR__ . "/utils/helpers/validation.php";
+		require_once __DIR__ . "/api/models/user.php";
+		require_once __DIR__ . "/api/repository/userRepo.php";
+
 		use API\Models\User;
 		use API\Repository\UserRepository;
 		use Utils\Helpers\DBConnection;
