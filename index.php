@@ -45,6 +45,12 @@
 	</script>
 	
 	<?php
+		require_once __DIR__ . "/utils/helpers/dotenv.php";
+
+		use Utils\Helpers\DotEnvEnvironment;
+
+		(new DotEnvEnvironment())->load(__DIR__);
+
 		if (isset($_POST["first_name"]) && isset($_POST["last_name"]) && isset($_POST["email"]) && isset($_POST["phone_number"]) && isset($_POST["password"])) {
 			$data = array(
 				'first_name' => $_POST["first_name"],
@@ -54,7 +60,8 @@
 				'password' => $_POST["password"]
 			);
 			
-			$ch = curl_init('http://localhost:8080/auth/signup');
+			$url = $_ENV["API_URL"] . "/auth/signup";
+			$ch = curl_init($url);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
@@ -69,7 +76,7 @@
 			$message = $response["message"];
 			echo $message;
 		} else {
-			echo "<script>alert(Please fill all the fields);</script>";
+			echo "Please fill all the fields";
 		}	
 	?>
 </html>
