@@ -19,7 +19,6 @@ class DBConnection {
             $user = $_ENV["DB_USER"];
             $password = $_ENV["DB_PASSWORD"] != "" ? $_ENV["DB_PASSWORD"] : "";
             $url = "mysql:host=" . $host . ";dbname=" . $dbname;
-            var_dump($password);
 
             $this->pdo = new PDO($url, $user, $password);
         } catch (PDOException $e) {

@@ -36,17 +36,40 @@
 			</form>
 		</div>
 	</body>
-	<?php phpinfo();
-		require_once __DIR__ . "/api/models/user.php";
-		use API\Models\User;
 
-		$user = new User(
-			"",
-			$_POST["first_name"],
-			$_POST["last_name"],
-			$_POST["email"],
-			$_POST["phone_number"],
-			$_POST["password"]
-		);
+	<script>
+		$("form").submit(function(){
+			$.post($(this).attr("action"), $(this).serialize());
+			return false;
+		});
+	</script>
+	
+	<?php
+		if (isset($_POST["first_name"]) && isset($_POST["last_name"]) && isset($_POST["email"]) && isset($_POST["phone_number"]) && isset($_POST["password"])) {
+			$data = array(
+				'first_name' => $_POST["first_name"],
+				'last_name' => $_POST["last_name"],
+				'email' => $_POST["email"],
+				'phone_number' => $_POST["phone_number"],
+				'password' => $_POST["password"]
+			);
+			
+			$ch = curl_init('http://localhost:8080/auth/signup');
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+			$jsonData = json_encode($data);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+	
+			$response = curl_exec($ch);
+	
+			curl_close($ch);
+			$response = json_decode($response, true);
+			$message = $response["message"];
+			echo $message;
+		} else {
+			echo "<script>alert(Please fill all the fields);</script>";
+		}	
 	?>
 </html>

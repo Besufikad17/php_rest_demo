@@ -13,7 +13,6 @@ class UserRepository {
 	}
 
 	public function create(User $user) {
-		echo $user->getEmail();
 		$fname = $user->getFirstName();
 		$lname = $user->getLastName();
 		$email = $user->getEmail();
