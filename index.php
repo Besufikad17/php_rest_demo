@@ -36,18 +36,9 @@
 			</form>
 		</div>
 	</body>
-	<?php
-		require_once __DIR__ . "/utils/helpers/db.php";
-		require_once __DIR__ . "/utils/helpers/validation.php";
+	<?php phpinfo();
 		require_once __DIR__ . "/api/models/user.php";
-		require_once __DIR__ . "/api/repository/userRepo.php";
-
 		use API\Models\User;
-		use API\Repository\UserRepository;
-		use Utils\Helpers\DBConnection;
-		use Utils\Helpers\Validation;
-
-		Validation::validateForm();
 
 		$user = new User(
 			"",
@@ -57,8 +48,5 @@
 			$_POST["phone_number"],
 			$_POST["password"]
 		);
-		
-		$repo = new UserRepository(new DBConnection());
-		$repo->create($user);
 	?>
 </html>

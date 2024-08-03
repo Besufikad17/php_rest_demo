@@ -3,7 +3,11 @@
 namespace Utils\Helpers;
 
 class Validation {
-    static function validateForm() {
-        return isset($_POST["first_name"]) && isset($_POST["last_name"]) && isset($_POST["email"]) && isset($_POST["phone_number"]);
+    static function validateForm($data) {
+        return isset($data["first_name"]) && 
+            isset($data["last_name"]) && 
+            isset($data["email"]) && 
+            isset($data["phone_number"]) && 
+            isset($data["password"]);
     }     
 }
